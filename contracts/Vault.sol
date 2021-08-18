@@ -2,14 +2,6 @@
 pragma solidity 0.5.16;
 
 /*
-Note: cannot use web3 on JVM, so use the contract deployed on ropsten
-Note: browser Web3 is old so use Web3 from truffle console
-
-Contract deployed on Ropsten
-0x3505a02BCDFbb225988161a95528bfDb279faD6b
-*/
-
-/*
 # Storage
 - 2 ** 256 slots
 - 32 bytes for each slot
@@ -22,7 +14,7 @@ contract Vault {
     // slot 0
     uint public count = 123;
     // slot 1
-    address public owner = msg.sender;
+    address private owner;
     bool public isTrue = true;
     uint16 public u16 = 31;
     // slot 2
@@ -52,6 +44,7 @@ contract Vault {
 
     constructor(bytes32 _password) public {
         password = _password;
+        owner = msg.sender;
     }
 
     function addUser(bytes32 _password) public {
